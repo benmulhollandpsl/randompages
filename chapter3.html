@@ -32,7 +32,7 @@
     .panel {
       background: #6B0F9C;
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
-      color: white;
+      color: black;
       text-align: center;
       align-items: center;
       /* Safari transitionend event.propertyName === flex */
@@ -51,11 +51,11 @@
       flex-direction: column;
     }
 
-    .panel1 { background-image: url('../CSSflexbox-1.png'); }
-    .panel2 { background-image: url('../CSSflexbox-2.png');  }
-    .panel3 { background-image:('./images/CSSflexbox-3.png'); }
-    .panel4 { background-image:('./images/CSSflexbox-4.png'); }
-    .panel5 { background-image:('./images/CSSflexbox-5.png'); }
+    .panel1 { background-image: url("./images/CSSflexbox-1.png"); }
+    .panel2 { background-image: url('./images/CSSflexbox-2.png');  }
+    .panel3 { background-image: url('./images/CSSflexbox-3.png');  }
+    .panel4 { background-image: url('./images/CSSflexbox-4.png');  }
+    .panel5 { background-image: url('./images/CSSflexbox-5.png');  }
 
     /* yuck fix backgroun images */
 
@@ -88,6 +88,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      text-shadow:-2px 4px white;
     }
     
     .panel p:nth-child(2) {
