@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+    <h1>Click/Tap to Start Drawing</h1>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ctx.strokeStyle = '#BADA55';
+ctx.lineJoin = 'round';  //gives rounded appearance
+ctx.lineCap = 'round';
+ctx.lineWidth = 100;  //size of brush
+
+// ctx.globalCompositeOperation = 'multiply'; subtract add etc lookup on google
+
+
+
+let isDrawing = false;
+// when click down set to true, when off set to false
+let lastX = 0;
+let lastY = 0;
+
+//where we play with hsl color
+let hue = 0;
+let direction = true;
+
+
+
+
+function draw(e) {
+  if(!isDrawing) return; //stop the fn from running when they are not moused dwn
+  // console.log(e);
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  // ctx.lineWidth = hue;
+
+
+  ctx.beginPath();
+  //start from
+  ctx.moveTo(lastX, lastY);
+  //go to
+
+
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+  [lastX, lastY] = [e.offsetX, e.offsetY]; //same as below  thisis destructuring an array 
+  // lastX = e.offsetX;
+  // lastY = e.offsetY;
+  hue++; //to incriment hue change
+if (hue >= 360){
+  hue = 0;  
+} //not needed as the colors will start over but could reach some hypothetical number hue limit if kept going.
+if(ctx.lineWidth >= 300 || ctx.lineWidth <= 1) {  //could be 100, 500 fun to play with
+  direction = !direction;
+}
+if(direction){
+  ctx.lineWidth++;
+} else {
+  ctx.lineWidth--;
+}
+}
+
+
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
+
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+<!-- faux footer -->
+<br>
+<hr>
+<h5>Menu Links</h3>
+  <ul>
+    <li><a href="#top">Top</a></li>
+
+    <li><a href="./index.html">Chapter 1</a></li>
+    <li><a href="./chapter2.html">Chapter 2</a></li>
+    <li><a href="./chapter3.html">Chapter 3</a></li>
+    <li><a href="./chapter6.html">Chapter 6</a></li>
+
+  </ul>
+  <br><br><br><br><br><br><br><br>
+  <p>
+  for future use
+  </p>
+</body>
+</html>
