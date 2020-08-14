@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>swipe along nav</title>
+  <title>Slidy Nav</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- taken direclty from wes bos 30days vanilla js, altered to fit this project -->
+<!-- taken from wes bos 30 days js, will turn into what i want for this -->
     <nav>
       <ul class="menu">
         <li><a href="">Home</a></li>
@@ -25,9 +25,31 @@
       <p>Aliquam <a href="">dicta</a> sequi culpa fugiat <a href="">consequuntur</a> pariatur optio ad minima, maxime <a href="">odio</a>, distinctio magni impedit tempore enim repellendus <a href="">repudiandae</a> quas!</p>
     </div>
 
-  <script>
-    //
-  </script>
+<script>
+  const triggers = document.querySelectorAll('a');
+  const highlight = document.createElement('span');
+  highlight.classList.add('highlight');
+  document.body.appendChild(highlight);
+
+  function highlightLink() {
+    const linkCoords = this.getBoundingClientRect();
+    console.log(linkCoords);
+    const coords = {
+      width: linkCoords.width,
+      height: linkCoords.height,
+      top: linkCoords.top + window.scrollY,
+      left: linkCoords.left + window.scrollX
+    };
+
+    highlight.style.width = `${coords.width}px`;
+    highlight.style.height = `${coords.height}px`;
+    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+
+  }
+
+  triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+
+</script>
 </body>
 </html>
 
